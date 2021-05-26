@@ -14,9 +14,9 @@ from gan import GAN, save_plot
 from resize_img import resize_img
 
 if __name__ == "__main__":
-
-    if (len(sys.argv)!= 1 ):
-        exit(1)
+    if len (sys.argv) != 2 :
+        print(" Arg not found : Using args equal 1 ")
+        sys.exit(1)
 
     resize_img(sys.argv[1],"database")
    
