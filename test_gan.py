@@ -17,7 +17,7 @@ def save_plot(examples, n):
 if __name__ == "__main__":
     model = load_model("saved_model/g_model.h5")
 
-    n_samples = 25     ## n should always be a square of an integer.
+    n_samples = 100     ## n should always be a square of an integer.
     latent_dim = 128
     latent_points = np.random.normal(size=(n_samples, latent_dim))
     examples = model.predict(latent_points)
