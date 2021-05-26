@@ -2,7 +2,7 @@
 import numpy as np
 import tensorflow as tf
 from glob import glob
-
+import sys
 #import constantes using gan 
 from constantes_gan import batch_size,latent_dim,num_epochs,n_samples
 
@@ -11,8 +11,14 @@ from load_data import tf_dataset
 from discriminator import build_discriminator
 from generator import build_generator
 from gan import GAN, save_plot
+from resize_img import resize_img
 
 if __name__ == "__main__":
+
+    if (len(sys.argv)!= 1 ):
+        exit(1)
+
+    resize_img(sys.argv[1],"database")
    
     images_path = glob("database/*")
 

@@ -73,10 +73,10 @@ $ git clone https://github.com/Barrydian/DC_GAN_for-OCT_image_Generation.git
 $ cd dc_gan_for-oct_image_generation
 
 # Install dependencies (if you want to run the project in local computer, if not go to next step)
-$ pip install requirements.txt
+$ pip install requirements.txt 
 
 # Run the main project file for training
-$ python main.py
+$ python main.py Images_native_PATH
 
 # When the training done, the project generates a fake images, then Run the test file in the same directory to get realistic images
 $ python test.py
