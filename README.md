@@ -85,6 +85,7 @@ $ python test.py
 
 
 
+
 Made by : <a href="https://github.com/Barrydian/DC_GAN_for-OCT_image_Generation.git}}" target="_blank">Mamadou Dian BARRY</a>
 
 &#xa0;
