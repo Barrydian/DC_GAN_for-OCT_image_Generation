@@ -1,24 +1,27 @@
 
 import numpy as np
-import cv2
+import sys
 from tensorflow.keras.models import load_model
-from matplotlib import pyplot
+from matplotlib.image import imsave
+from skimage import exposure
+from constantes_gan import IMG_CHANNEL, latent_dim, n_samples
 
-def save_plot(examples, n):
-    examples = (examples + 1) / 2.0
-    for i in range(n * n):
-        pyplot.subplot(n, n, i+1)
-        pyplot.axis("off")
-        pyplot.imshow(examples[i])
-    filename = "fake.png"
-    pyplot.savefig(filename)
-    pyplot.close()
 
+def save_imgs(path, imgs, num_channels):
+    for i in range(imgs.shape[0]):
+        img = np.squeeze(examples[i], axis=2)
+        if num_channels==1:
+            img = np.stack((img,)*3, axis=-1)
+        img = exposure.rescale_intensity(img, out_range=(0,1))
+        imsave(path + "/img_" + str(i) + ".png", img)
+        
 if __name__ == "__main__":
-    model = load_model("saved_model/g_model.h5")
+    if len (sys.argv) != 2 :
+        print(" Args not found : path to weights file for arg 1.")
+        sys.exit(1)
 
-    n_samples = 100     ## n should always be a square of an integer.
-    latent_dim = 128
+    model = load_model(sys.argv[1] + "/g_model.h5")
+
     latent_points = np.random.normal(size=(n_samples, latent_dim))
     examples = model.predict(latent_points)
-    save_plot(examples, int(np.sqrt(n_samples)))
+    save_imgs(sys.argv[1], examples, IMG_CHANNEL)
