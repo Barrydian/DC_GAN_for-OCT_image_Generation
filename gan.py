@@ -61,12 +61,15 @@ class GAN(Model):
 
         return {"d1_loss": d1_loss, "d2_loss": d2_loss, "g_loss": g_loss}
 
-def save_plot(examples, epoch, n):
+def save_plot(path, examples, epoch, n, num_channels):
     examples = (examples + 1) / 2.0
     for i in range(n * n):
         pyplot.subplot(n, n, i+1)
         pyplot.axis("off")
-        pyplot.imshow(examples[i])  ## pyplot.imshow(np.squeeze(examples[i], axis=-1))
-    filename = f"samples/generated_plot_epoch-{epoch+1}.png"
+        img = np.squeeze(examples[i], axis=2)
+        if num_channels==1:
+            img = np.stack((img,)*3, axis=-1)
+        pyplot.imshow(img)  ## pyplot.imshow(np.squeeze(examples[i], axis=-1))
+    filename = path + f"/generated_plot_epoch-{epoch+1}.png"
     pyplot.savefig(filename)
     pyplot.close()

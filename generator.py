@@ -42,7 +42,7 @@ def build_generator(latent_dim):
         )
 
     x = conv_block(x,
-        num_filters=3,  ## Change this to 1 for grayscale.
+        num_filters=IMG_CHANNEL,  ## Change this to 1 for grayscale.
         kernel_size=5,
         strides=1,
         activation=False
